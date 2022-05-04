@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/register.css">
+    <title>Rollereats || Login</title>
+</head>
+<body>
+    <%- include('../partials/header.ejs') %>
+
+    <% for (let i = 0; i < usuarios.length; i++) {
+		if (usuarios[i].id_Usuario == id) {
+		  var usuario = usuarios[i];
+		}
+	  } %>
+
+    <div class="contenedor-principal">
+        <div class="con-register">
+            <img src="/img/undraw_Login_re_4vu22.png" alt="" id="imagen-registro">
+            <form action="/usuarios/editarUsuario/<%=usuario.id_Usuario%>?_method=PUT" method="POST" class="formulario" enctype="multipart/form-data">
+                <h3>Registro</h3>
+                <input  class="form" type="email" placeholder="Correo electronico" id="mail" name="mail" value ="<%=usuarioEditable.correo_Usuario%>" required>
+                <input  class="form" type="password" placeholder="Contraseña" id="contraseña" name = "contraseña" value ="<%=usuarioEditable.contraseña_Usuario%>" required>
+                <input class="form" type="number" placeholder="Numero Telefonico" id="numero" name ="numero" value ="<%=usuarioEditable.numero_Usuario%>"  required>
+                <input class="form" type= "text" placeholder="Pais" id="pais" name ="pais" value ="<%=usuarioEditable.pais_Usuario%>"  required>
+                <input class="form" type= "file" placeholder="imagen" id="imagen" name ="imagen">
+                <button class="button" value="">Guardar Usuario</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/ea2382ba85.js" crossorigin="anonymous"></script>
+
+      <!-- Footer -->
+      <%- include('../partials/footer.ejs') %>
+</body>
+</html>
