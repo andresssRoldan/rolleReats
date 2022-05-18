@@ -1,11 +1,10 @@
 //Módulos
-
 const express = require("express");
 const rutas = express.Router();
 const controller = require("../controllers/controllerRestaurantes");
 const path = require("path");
 const multer = require("multer");
-let logintMiddleware = require("../middlewares/loginMiddleware");
+//let logintMiddleware = require("../middlewares/loginMiddleware");
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -21,15 +20,15 @@ var storage = multer.diskStorage({
 var upload = multer({ storage });
 
 //Rutas Restaurantes
-rutas.get("/", logintMiddleware, controller.restaurantes);
+rutas.get("/", controller.index);
 //Crear Producto
-rutas.get("/createProducto", controller.createProducto);
-rutas.post("/createProducto", upload.any(), controller.storeProducto);
+rutas.get("/create", controller.create);
+rutas.post("/create/:restaurant", upload.any('img-restaurant'), controller.store);
 //Editar Producto
 rutas.get("/edit/:id", controller.edit);
-rutas.put("/edit/:id", upload.any(), controller.update);
+rutas.put("/edit/:restaurant", upload.any('img-restaurant'), controller.update);
 
 //Eliminar
-rutas.delete("/eliminar/:id", controller.destroy);
+rutas.delete("/delete/:id", controller.destroy);
 
 module.exports = rutas;
